@@ -7,7 +7,6 @@ const Persons = ({ newFilter, persons, deletePerson }) => {
         ? persons.map((person, i) => (
             <div>
               <div key={i}>
-                {" "}
                 {person.name + " " + person.number}
                 &nbsp;&nbsp;
                 <Delete deletePerson={deletePerson} personId={person.id} />
