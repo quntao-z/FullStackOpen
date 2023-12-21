@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CountryInformation from "./CountryInformation";
 
-const ShowCountryButton = ({country}) => {
+const ShowCountryButton = ({ country }) => {
   const [showCountryData, setShowCountryData] = useState(false);
 
   const handleShowCountryData = () => {

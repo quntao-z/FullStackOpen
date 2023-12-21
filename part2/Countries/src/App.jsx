@@ -16,24 +16,22 @@ const App = () => {
   }, []);
 
   const handleCountriesChange = (event) => {
-    setSearchCountries(event.target.value)
-    filteredCountryList(event.target.value)
+    setSearchCountries(event.target.value);
+    filteredCountryList(event.target.value);
   };
 
   const filteredCountryList = (inputCountry) => {
-    let countryList = allCountriesList.filter((country) =>
-      country.toLowerCase().includes(inputCountry.toLowerCase())
-    );
+    let countryList = allCountriesList.filter((country) => country.toLowerCase().includes(inputCountry.toLowerCase()));
 
     setFilterCountryList(countryList);
-  }
+  };
 
   return (
     <div>
       <div>
         find countries
         <input onChange={(e) => handleCountriesChange(e)} />
-        <Country filterCountryList={filterCountryList} searchValue={searchCountries}/>
+        <Country filterCountryList={filterCountryList} searchValue={searchCountries} />
       </div>
     </div>
   );
