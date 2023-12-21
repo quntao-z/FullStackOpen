@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import countryService from "./services/country"
+import countryService from "./services/country";
 import Country from "./components/Country";
 
 const App = () => {
   const [allCountriesList, setAllCountriesList] = useState([]);
   const [searchCountries, setSearchCountries] = useState("");
-
+  const [filterCountryList, setFilterCountryList] = useState([]);
 
   useEffect(() => {
     countryService.getAllCountries().then((response) => {
@@ -16,22 +16,24 @@ const App = () => {
   }, []);
 
   const handleCountriesChange = (event) => {
-    setSearchCountries(event.target.value);
+    setSearchCountries(event.target.value)
+    filteredCountryList(event.target.value)
   };
 
-  const filterCountry = () => {
-    const filteredList = allCountriesList.filter(country =>
-        country.toLowerCase().includes(searchCountries.toLowerCase())
+  const filteredCountryList = (inputCountry) => {
+    let countryList = allCountriesList.filter((country) =>
+      country.toLowerCase().includes(inputCountry.toLowerCase())
     );
-    return filteredList;
-  };
+
+    setFilterCountryList(countryList);
+  }
 
   return (
     <div>
       <div>
         find countries
-        <input value={searchCountries} onChange={(e) => handleCountriesChange(e)} />
-        <Country filterCountryList={filterCountry()}/>
+        <input onChange={(e) => handleCountriesChange(e)} />
+        <Country filterCountryList={filterCountryList} searchValue={searchCountries}/>
       </div>
     </div>
   );
