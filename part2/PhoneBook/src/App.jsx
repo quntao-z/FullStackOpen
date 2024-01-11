@@ -48,19 +48,23 @@ const App = () => {
           })
           .catch((error) => {
             setError(true);
-            setNotificationMessage("Information of " + checkPersonObject.name + " has been removed from server");
+            setNotificationMessage(error.response.data.error);
           });
       }
     } else {
       const personObject = {
         name: newName,
         number: newNumber,
-        id: persons[persons.length - 1].id + 1,
       };
-      personService.create(personObject).then((returnPerson) => {
+      personService.create(personObject)
+      .then((returnPerson) => {
         setPersons(persons.concat(returnPerson));
         setError(false);
         setNotificationMessage("Added " + returnPerson.name);
+      })
+      .catch((error) => {
+        setError(true);
+        setNotificationMessage(error.response.data.error);
       });
     }
     setNewName("");
